@@ -32,17 +32,25 @@ describe('CreateAppointment', () => {
   it('should not be able to create two appointments on the same date.', async () => {
     const appointmentDate = new Date(2021, 4, 10, 11);
 
+    jest.spyOn(Date, 'now').mockImplementationOnce(() => {
+      return new Date(2021, 4, 10, 10).getTime();
+    });
+
     await createAppointment.execute({
       date: appointmentDate,
-      provider_id: 'provider-id',
       user_id: 'user-id',
+      provider_id: 'provider-id',
+    });
+
+    jest.spyOn(Date, 'now').mockImplementationOnce(() => {
+      return new Date(2021, 4, 10, 10).getTime();
     });
 
     await expect(
       createAppointment.execute({
         date: appointmentDate,
-        provider_id: '123456',
-        user_id: '123456',
+        user_id: 'user-id',
+        provider_id: 'provider-id',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
