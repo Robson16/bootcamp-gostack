@@ -90,3 +90,6 @@ typings/
 # Temporary files
 tmp/*
 !tmp/.gitkeep
+
+# ORM Congig
+ormconfig.json
