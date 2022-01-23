@@ -7,7 +7,7 @@ import uploadConfig from '@config/upload';
 
 import IStorageProvider from '../models/IStorageProvider';
 
-export default class DiskStorageProvider implements IStorageProvider {
+class DiskStorageProvider implements IStorageProvider {
   private client: S3;
 
   private bucket: string | undefined = uploadConfig.config.aws.bucket;
@@ -61,3 +61,5 @@ export default class DiskStorageProvider implements IStorageProvider {
       .promise();
   }
 }
+
+export default DiskStorageProvider;

@@ -31,10 +31,10 @@ describe('UpdateUserAvatar', () => {
       avatarFilename: 'avatar.jpg',
     });
 
-    await expect(user.avatar).toBe('avatar.jpg');
+    expect(user.avatar).toBe('avatar.jpg');
   });
 
-  it('should not be able to update avatar from non authenticated user', async () => {
+  it('should not be able to update avatar from non existing user', async () => {
     await expect(
       updateUserAvatar.execute({
         user_id: 'non-existing-user',
@@ -43,7 +43,7 @@ describe('UpdateUserAvatar', () => {
     ).rejects.toBeInstanceOf(AppError);
   });
 
-  it('should delete old avatar when uploading a new one', async () => {
+  it('should delete old avatar when updating a new one', async () => {
     const deleteFile = jest.spyOn(fakeStorageProvider, 'deleteFile');
 
     const user = await fakeUsersRepository.create({
@@ -62,7 +62,7 @@ describe('UpdateUserAvatar', () => {
       avatarFilename: 'avatar2.jpg',
     });
 
-    await expect(deleteFile).toHaveBeenCalledWith('avatar.jpg');
-    await expect(user.avatar).toBe('avatar2.jpg');
+    expect(deleteFile).toHaveBeenCalledWith('avatar.jpg');
+    expect(user.avatar).toBe('avatar2.jpg');
   });
 });

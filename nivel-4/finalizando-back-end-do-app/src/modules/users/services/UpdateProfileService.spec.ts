@@ -1,5 +1,4 @@
 import AppError from '@shared/errors/AppError';
-import passwordRouter from '../infra/http/routes/password.routes';
 
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
@@ -33,8 +32,8 @@ describe('UpdateProfile', () => {
       email: 'johnclaude@example.com',
     });
 
-    await expect(updatedUser.name).toBe('John Claude');
-    await expect(updatedUser.email).toBe('johnclaude@example.com');
+    expect(updatedUser.name).toBe('John Claude');
+    expect(updatedUser.email).toBe('johnclaude@example.com');
   });
 
   it('should not be able to update the profile from non-existing user', async () => {
@@ -84,7 +83,7 @@ describe('UpdateProfile', () => {
       password: '123123',
     });
 
-    await expect(updatedUser.password).toBe('123123');
+    expect(updatedUser.password).toBe('123123');
   });
 
   it('should not be able to update the password without inform old password', async () => {
