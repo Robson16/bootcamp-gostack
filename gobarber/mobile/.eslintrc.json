@@ -46,6 +46,7 @@
     "no-use-before-define": "off",
     "prettier/prettier": "error",
     "@typescript-eslint/camelcase": "off",
+    "import/no-duplicates": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
