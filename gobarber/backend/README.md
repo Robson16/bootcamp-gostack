@@ -1,69 +1,139 @@
-# Recuperação de senha
+# GoBaber - Back-end (API REST em Node.js)
 
-**RF**
+Este é o repositório da API REST do projeto GoBaber, desenvolvida em Node.js com TypeScript. Esta API é responsável por toda a lógica de negócio da aplicação, persistência de dados e comunicação com os front-ends web e mobile.
 
-- O usuário deve poder recuperar sua senha informando o seu e-mail;
-- O usuário deve receber um e-mail com instruções de recuperação de senha;
-- O usuário deve poder resetar sua senha;
+## Tecnologias Utilizadas
 
-**RNF**
+Este projeto foi construído utilizando as seguintes tecnologias principais:
 
-- Utilizar Mailtrap para testar envios em ambiente de dev;
-- Utilizar Amazon SES para envios em produção;
-- O envio de e-mails deve acontecer em segundo plano (background job);
+-   **Node.js:** O ambiente de execução JavaScript para o servidor.
+-   **TypeScript:** Um superset do JavaScript que adiciona tipagem estática, melhorando a segurança e a escalabilidade do código.
+-   **Express:** Um framework web minimalista e flexível para Node.js, utilizado para construir a API REST.
+-   **TypeORM:** Um ORM (Object-Relational Mapping) que facilita a interação com o banco de dados PostgreSQL.
+-   **PostgreSQL:** O sistema de gerenciamento de banco de dados relacional utilizado para persistir os dados da aplicação.
+-   **Bcryptjs:** Uma biblioteca para realizar o hash de senhas, garantindo a segurança das credenciais dos usuários.
+-   **Jsonwebtoken (JWT):** Utilizado para gerar e verificar tokens de autenticação, protegendo as rotas da API.
+-   **Multer:** Um middleware para Node.js que facilita o tratamento de uploads de arquivos, como fotos de perfil de usuários e prestadores.
+-   **Uuid:** Uma biblioteca para gerar IDs únicos.
+-   **Date-fns:** Uma biblioteca moderna para manipulação e formatação de datas, crucial para o gerenciamento de agendamentos.
+-   **CORS:** Middleware para habilitar o Cross-Origin Resource Sharing, permitindo que diferentes domínios (front-end e mobile) acessem a API.
+-   **Express Async Errors:** Uma biblioteca para facilitar o tratamento de erros em funções assíncronas do Express.
+-   **Celebrate:** Uma biblioteca para realizar a validação de dados de requisição utilizando o Joi (integrado no Celebrate).
+-   **Tsyringe:** Uma biblioteca para injeção de dependências, promovendo a desacoplamento e a testabilidade do código.
+-   **Reflect-metadata:** Uma dependência do TypeORM e do Tsyringe para funcionalidades avançadas de metadados.
+-   **Handlebars:** Um motor de templates utilizado para gerar o conteúdo dos e-mails de recuperação de senha.
+-   **Nodemailer:** Uma biblioteca para enviar e-mails, utilizada na funcionalidade de recuperação de senha.
+-   **Redis e Ioredis:** Um banco de dados NoSQL em memória utilizado para caching e para a implementação de filas de background jobs (com o Rate Limiter Flexible).
+-   **Rate Limiter Flexible:** Utilizado para implementar o controle de frequência de requisições, protegendo a API contra ataques de força bruta.
+-   **MongoDB:** Um banco de dados NoSQL utilizado para armazenar as notificações dos prestadores de serviço.
+-   **Socket.io:** Uma biblioteca para comunicação bidirecional em tempo real entre o servidor e os clientes (para envio de notificações).
+-   **AWS SDK:** Utilizado para integração com serviços da Amazon Web Services, como o Simple Email Service (SES) para envio de e-mails em produção e, possivelmente, para armazenamento de arquivos (S3).
+-   **Dotenv:** Uma biblioteca para carregar variáveis de ambiente de um arquivo `.env`.
+-   **Class Transformer:** Uma biblioteca para transformar objetos JavaScript em outras estruturas, útil para formatar dados de resposta da API.
+-   **Mime:** Uma biblioteca para determinar o tipo MIME de um arquivo.
 
-**RN**
+## Scripts Disponíveis
 
-- O link enviado por email para resetar senha, deve expirar em 2h;
-- O usuário precisa confirmar a nova senha ao resetar sua senha;
+No diretório raiz do projeto, você pode executar os seguintes scripts:
 
-# Atualização do perfil
+### `yarn build` ou `npm run build`
 
-**RF**
+Compila o código TypeScript para JavaScript na pasta `dist`.
 
-- O usuário deve poder atualizar seu nome, email e senha;
+### `yarn dev:server` ou `npm run dev:server`
 
-**RN**
+Inicia o servidor de desenvolvimento utilizando `ts-node-dev`, com suporte a hot reloading e inspeção.
 
-- O usuário não pode alterar seu email para um email já utilizado;
-- Para atualizar sua senha, o usuário deve informar a senha antiga;
-- Para atualizar sua senha, o usuário precisa confirmar a nova senha;
+### `yarn start` ou `npm start`
 
-# Painel do prestador
+Inicia o servidor em modo de produção (após a compilação).
 
-**RF**
+### `yarn typeorm` ou `npm run typeorm`
 
-- O usuário deve poder listar seus agendamentos de um dia específico;
-- O prestador deve receber uma notificação sempre que houver um novo agendamento;
-- O prestador deve poder visualizar as notificações não lidas;
+Executa a CLI do TypeORM para realizar operações no banco de dados, como criar migrations.
 
-**RNF**
+### `yarn test` ou `npm test`
 
-- Os agendamentos do prestador no dia devem ser armazenados em cache;
-- As notificações do prestador devem ser armazenadas no MongoDB;
-- As notificações do prestador devem ser enviadas em tempo-real utilizando Socket.io;
+Executa os testes unitários configurados para o back-end.
 
-**RN**
+## Funcionalidades Principais
 
-- A notificação deve ter um status de lida ou não-lida para que o prestador possa controlar;
+Este back-end implementa as seguintes funcionalidades:
 
-# Agendamento de serviços
+### # Recuperação de senha
 
-**RF**
+**RF (Requisitos Funcionais)**
 
-- O usuário deve poder listar todos prestadores de serviço cadastrados;
-- O usuário deve poder listar os dias de um mês com pelo menos um horário disponível de um prestador;
-- O usuário deve poder listar horários disponíveis em um dia específico de um prestador;
-- O usuário deve poder realizar um novo agendamento com um prestador;
+-   O usuário deve poder solicitar a recuperação de sua senha informando seu endereço de e-mail.
+-   O sistema deve enviar um e-mail contendo instruções e um link para a redefinição da senha.
+-   O usuário deve ser capaz de definir uma nova senha através do link recebido por e-mail.
 
-**RNF**
+**RNF (Requisitos Não Funcionais)**
 
-- A listagem de prestadores deve ser armazenada em cache;
+-   Utilização do Mailtrap para testes de envio de e-mails em ambiente de desenvolvimento.
+-   Utilização do Amazon SES para envio de e-mails em ambiente de produção.
+-   O envio de e-mails deve ser realizado em segundo plano, utilizando um sistema de background jobs (possivelmente com Redis e alguma biblioteca de filas).
 
-**RN**
+**RN (Regras de Negócio)**
 
-- Os agendamentos devem estar disponíveis entre 8h às 18h (Primeiro às 8h, último às 17h);
-- O usuário não pode agendar em um horário que já passou;
-- O usuário não pode agendar serviços consigo mesmo;
-- Cada agendamento deve durar 1h exatamente;
-- O usuário não pode agendar em um horário já ocupado;
+-   O link para redefinição de senha enviado por e-mail deve ter uma validade de 2 horas.
+-   Ao definir uma nova senha, o usuário deve confirmá-la para evitar erros de digitação.
+
+### # Atualização do perfil
+
+**RF (Requisitos Funcionais)**
+
+-   O usuário autenticado deve poder atualizar seu nome, endereço de e-mail e senha.
+
+**RN (Regras de Negócio)**
+
+-   O sistema não deve permitir a alteração do e-mail para um endereço que já esteja cadastrado no sistema.
+-   Para atualizar a senha, o usuário deve primeiramente fornecer sua senha atual para verificação de identidade.
+-   Ao definir uma nova senha, o usuário deve confirmá-la.
+
+### # Painel do prestador
+
+**RF (Requisitos Funcionais)**
+
+-   O prestador de serviço autenticado deve poder listar todos os seus agendamentos para um dia específico.
+-   O sistema deve enviar uma notificação ao prestador sempre que um novo agendamento for realizado para ele.
+-   O prestador deve ter a capacidade de visualizar as notificações que ainda não foram marcadas como lidas.
+
+**RNF (Requisitos Não Funcionais)**
+
+-   Os agendamentos do prestador para um determinado dia devem ser armazenados em cache (possivelmente utilizando Redis) para otimizar a performance de leitura.
+-   As notificações dos prestadores devem ser armazenadas em um banco de dados NoSQL MongoDB.
+-   O envio de novas notificações aos prestadores deve ocorrer em tempo real utilizando a biblioteca Socket.io.
+
+**RN (Regras de Negócio)**
+
+-   Cada notificação deve possuir um status indicando se já foi lida ou não pelo prestador, permitindo o controle das notificações pendentes.
+
+### # Agendamento de serviços
+
+**RF (Requisitos Funcionais)**
+
+-   O usuário autenticado deve poder listar todos os prestadores de serviço cadastrados na plataforma.
+-   O usuário deve poder visualizar os dias de um determinado mês em que pelo menos um horário está disponível para um prestador específico.
+-   O usuário deve poder listar todos os horários disponíveis em um dia específico de um prestador de serviço.
+-   O usuário autenticado deve poder realizar um novo agendamento com um prestador de sua escolha, selecionando um horário disponível.
+
+**RNF (Requisitos Não Funcionais)**
+
+-   A listagem dos prestadores de serviço deve ser armazenada em cache (possivelmente utilizando Redis) para reduzir a carga no banco de dados.
+
+**RN (Regras de Negócio)**
+
+-   Os horários de agendamento devem estar disponíveis somente entre as 8h e as 18h (sendo o primeiro horário às 8h e o último às 17h, considerando agendamentos de 1 hora).
+-   O usuário não pode realizar um agendamento para um horário que já passou.
+-   Um usuário não pode agendar um serviço consigo mesmo.
+-   Cada agendamento de serviço possui uma duração fixa de 1 hora.
+-   O sistema não deve permitir que um usuário agende um serviço em um horário que já esteja ocupado por outro agendamento.
+
+## Licença
+
+Este projeto está licenciado sob a Licença MIT.
+
+### ☕❤
+
+[Robson H. Rodrigues](https://www.linkedin.com/in/robson-h-rodrigues-93341746/)
