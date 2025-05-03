@@ -1,7 +1,7 @@
 # GoBaber: Plataforma de Agendamento de Serviços de Beleza
 
 <p align="center">
-    <img alt="screenshot" title="Screenshot" src="https://github.com/Robson16/bootcamp-gostack/tree/master/gobarber/.github/cover.jpg" />
+    <img alt="screenshot" title="Screenshot" src="./.github/cover.jpg" />
 </p>
 
 O GoBaber é uma solução completa para o agendamento de serviços em estabelecimentos como barbearias e salões de beleza. Desenvolvido como parte do GoStack 2020 da Rocketseat, este projeto abrange um ecossistema de aplicações interconectadas, construídas com foco em uma experiência de usuário fluida e eficiente.

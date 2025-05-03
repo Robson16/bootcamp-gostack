@@ -1,7 +1,7 @@
 # GitHub Explorer
 
 <p align="center">
-    <img alt="screenshot" title="Screenshot" src="https://github.com/Robson16/bootcamp-gostack/tree/master/github-explorer/.github/cover.jpg" />
+    <img alt="screenshot" title="Screenshot" src="./.github/cover.jpg" />
 </p>
 
 ## Sobre o Projeto
