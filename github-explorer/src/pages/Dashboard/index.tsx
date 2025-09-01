@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FormEvent } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ import api from '../../services/api';
 
 import logoImg from '../../assets/logo.svg';
 
-import { Title, Form, Error, Repositories } from './styles';
+import { Error, Form, Repositories, Title } from './styles';
 
 interface Repository {
   full_name: string;
@@ -22,12 +22,12 @@ const Dashboard: React.FC = () => {
   const [inputError, setInputError] = useState('');
 
   const [repositories, setRepositories] = useState<Repository[]>(() => {
-    const storagedRepositories = localStorage.getItem(
+    const storageRepositories = localStorage.getItem(
       '@GithubExplorer:repositories',
     );
 
-    if (storagedRepositories) {
-      return JSON.parse(storagedRepositories);
+    if (storageRepositories) {
+      return JSON.parse(storageRepositories);
     }
 
     return [];
