@@ -12,18 +12,18 @@ O `github-explorer` é uma aplicação web desenvolvida em React com TypeScript 
 
 Este projeto foi construído utilizando as seguintes tecnologias principais:
 
--   **React:** Uma biblioteca JavaScript para construir interfaces de usuário.
--   **TypeScript:** Um superset do JavaScript que adiciona tipagem estática.
--   **Styled Components:** Uma biblioteca para estilizar componentes React utilizando CSS-in-JS.
--   **Axios:** Uma biblioteca para fazer requisições HTTP.
--   **React Router DOM:** Uma biblioteca para roteamento na aplicação React.
--   **React Icons:** Uma biblioteca para utilizar ícones React.
+- **React:** Uma biblioteca JavaScript para construir interfaces de usuário.
+- **TypeScript:** Um superset do JavaScript que adiciona tipagem estática.
+- **Styled Components:** Uma biblioteca para estilizar componentes React utilizando CSS-in-JS.
+- **Axios:** Uma biblioteca para fazer requisições HTTP.
+- **React Router DOM:** Uma biblioteca para roteamento na aplicação React.
+- **React Icons:** Uma biblioteca para utilizar ícones React.
 
 Além dessas, as seguintes dependências de desenvolvimento estão configuradas para auxiliar no desenvolvimento e qualidade do código:
 
--   **@types/...:** Definições de tipo para as bibliotecas JavaScript utilizadas.
--   **eslint e seus plugins:** Ferramenta para análise estática de código, seguindo as configurações do Airbnb e Prettier para garantir um estilo de código consistente.
--   **Prettier:** Um formatador de código para manter a consistência no estilo.
+- **@types/...:** Definições de tipo para as bibliotecas JavaScript utilizadas.
+- **eslint e seus plugins:** Ferramenta para análise estática de código, seguindo as configurações do Airbnb e Prettier para garantir um estilo de código consistente.
+- **Prettier:** Um formatador de código para manter a consistência no estilo.
 
 ## Scripts Disponíveis
 
