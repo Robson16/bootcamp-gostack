@@ -53,12 +53,6 @@ Visualize o design da aplicação e a estrutura das telas no Figma:
 
 [Link para o Layout](https://www.figma.com/design/HOCmxfrElzLpI75LdzFLia/Github-Explorer)
 
-## Demonstração Online
-
-Você pode experimentar a aplicação online através do seguinte link:
-
-[Acessar Demonstração](https://github-explorer-topaz.vercel.app/)
-
 ## Licença
 
 Este projeto está licenciado sob a Licença MIT.
